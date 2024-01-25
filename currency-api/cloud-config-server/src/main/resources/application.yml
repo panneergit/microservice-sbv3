@@ -1,0 +1,7 @@
+server:
+  port: 8888
+  
+spring:
+  application.name: configs-service
+  cloud.config.server.git.uri: file:///D:\WorkSpace\In28Minutes\MSSBV3\local-repo
+

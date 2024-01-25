@@ -1,0 +1,13 @@
+server:
+  port: 8071
+  servlet.context-path: /limits-service
+  error.include-stacktrace: never
+
+spring:
+  application.name: limits-service
+  profiles.active: dev
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config.enabled: true
+    config.profile: dev
