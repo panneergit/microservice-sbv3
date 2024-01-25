@@ -1,6 +1,6 @@
 FROM amazoncorretto:17-alpine-jdk
 
-LABEL applicationname="Currency Exchange Service"
+LABEL applicationname="Currency Naming Server"
 LABEL author="Panneer"
 LABEL orgination="STS"
 
