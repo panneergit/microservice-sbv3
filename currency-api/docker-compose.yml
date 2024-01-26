@@ -14,6 +14,7 @@ services:
       - EUREKA.CLIENT.REGISTER-WITH-EUREKA=true
       - EUREKS.CLIENT.FETCH-REGISTORY=true
       - EUREKA.CLIENT.SERVICEURL.DEFAULTZONE=http://naming-server:8761/eureka
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin-server:9411/api/v2/spans
     depends_on:
       - naming-server
       - apigateway-server
@@ -37,6 +38,7 @@ services:
       - EUREKA.CLIENT.REGISTER-WITH-EUREKA=true
       - EUREKS.CLIENT.FETCH-REGISTORY=true
       - EUREKA.CLIENT.SERVICEURL.DEFAULTZONE=http://naming-server:8761/eureka
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin-server:9411/api/v2/spans
     depends_on:
       - naming-server
       - apigateway-server
@@ -45,6 +47,29 @@ services:
     deploy:
       resources:
         limits:
+          memory: 250M
+
+  apigateway-server:
+    build:
+      context: eureka-apigateway-server
+      dockerfile: src/docker/Dockerfile
+    image: apigateway-server
+    container_name: apigateway-server
+    tty: true
+    ports:
+      - 8765:8765
+    environment:
+      - EUREKA.CLIENT.REGISTER-WITH-EUREKA=true
+      - EUREKS.CLIENT.FETCH-REGISTORY=true
+      - EUREKA.CLIENT.SERVICEURL.DEFAULTZONE=http://naming-server:8761/eureka
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin-server:9411/api/v2/spans
+    depends_on:
+      - naming-server
+    networks:
+      - currency-network-api
+    deploy:
+      resources:
+        limits: 
           memory: 250M
 
   naming-server:
@@ -66,26 +91,17 @@ services:
         limits:
           memory: 250M
 
-  apigateway-server:
-    build:
-      context: eureka-apigateway-server
-      dockerfile: src/docker/Dockerfile
-    image: apigateway-server
-    container_name: apigateway-server
-    tty: true
+  zipkin-server:
+    image: openzipkin/zipkin
+    container_name: openzipkin
     ports:
-      - 8765:8765
-    environment:
-      - EUREKA.CLIENT.REGISTER-WITH-EUREKA=true
-      - EUREKS.CLIENT.FETCH-REGISTORY=true
-      - EUREKA.CLIENT.SERVICEURL.DEFAULTZONE=http://naming-server:8761/eureka
-    depends_on:
-      - naming-server
+      - 9411:9411
+    restart: always
     networks:
       - currency-network-api
     deploy:
       resources:
-        limits: 
+        limits:
           memory: 250M
 
   zookeeper:
@@ -98,8 +114,12 @@ services:
       - ZOOKEEPER_TICK_TIME=2000
     networks:
       - currency-network-api
+    deploy:
+      resources:
+        limits:
+          memory: 300M
 
-  kafka:
+  kafka: 
     image: confluentinc/cp-kafka:latest
     container_name: kafka
     ports:
