@@ -161,7 +161,7 @@ services:
     image: postgres
     container_name: postgres
     healthcheck:
-      test: []
+      test: ["CMD","pg_isready","-q","-d","postgres","-U","postgres"]
       timeout: 45s
       interval: 10s
       retries: 10
