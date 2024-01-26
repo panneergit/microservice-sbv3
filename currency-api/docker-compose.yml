@@ -92,7 +92,7 @@ services:
           memory: 250M
 
   zipkin-server:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:latest
     container_name: openzipkin
     ports:
       - 9411:9411
