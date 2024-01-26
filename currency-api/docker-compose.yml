@@ -25,15 +25,39 @@ services:
         limits:
           memory: 250M
 
-  exchange-service:
+  exchange-service_1:
     build:
       context: currency-exchange-service
       dockerfile: src/docker/Dockerfile
     image: exchange-service
-    container_name: exchange-service
+    container_name: exchange-service-1
     tty: true
     ports:
       - 8081:8081
+    environment:
+      - EUREKA.CLIENT.REGISTER-WITH-EUREKA=true
+      - EUREKS.CLIENT.FETCH-REGISTORY=true
+      - EUREKA.CLIENT.SERVICEURL.DEFAULTZONE=http://naming-server:8761/eureka
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin-server:9411/api/v2/spans
+    depends_on:
+      - naming-server
+      - apigateway-server
+    networks:
+      - currency-network-api
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+
+  exchange-service_2:
+    build:
+      context: currency-exchange-service
+      dockerfile: src/docker/Dockerfile
+    image: exchange-service
+    container_name: exchange-service-2
+    tty: true
+    ports:
+      - 8082:8082
     environment:
       - EUREKA.CLIENT.REGISTER-WITH-EUREKA=true
       - EUREKS.CLIENT.FETCH-REGISTORY=true
