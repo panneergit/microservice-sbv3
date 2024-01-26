@@ -101,7 +101,8 @@ docker container stop f708b7ee1a8b
 
 docker run -p -d 5000:5000 in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
 
-### ---------------------------------------------------------------------------------------------------------------------------------------
+### 
+
 docker images
 
 docker pull mysql #gets latest
@@ -116,7 +117,8 @@ docker image inspect 100229ba687e
 
 docker image remove mysql
 
-### ----------------------------------------------------------------------------------------------------------------------------------------
+### 
+
 docker run -p -d 5000:5000 in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
 
 docker container rm 3e657ae9bd16
@@ -137,7 +139,7 @@ docker container prune
 
 docker run -p -d 5000:5000 --restart=always in28min/todo-rest-api-h2:0.0.1-SNAPSHOT #automatically  starts after docker desktop is restarted
 
-### ---------------------------------------------------------------------------------------------------------------------------------------
+### 
 docker events #track events - launch and stop containers
 
 docker top 9009722eac4d
@@ -160,7 +162,7 @@ docker container run -p 5000:5000 -d -m 512m --cpu-quota=50000  in28min/todo-res
 
 docker system events
 
-### ---------------------------------------------------------------------------------------------------------------------------------------
+### 
 docker push docker.io/in28min/mmv3-currency-exchange-service:0.0.1-SNAPSHOT
 
 docker-compose --version
