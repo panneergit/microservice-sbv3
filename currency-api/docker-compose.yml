@@ -184,11 +184,11 @@ services:
           memory: 1024M
 
 volumes:
-  - kafka-data:
-  - kafka-log:
-  - kafka-secrets:
-  - mysql-data:
-  - postgres-data:
+  kafka-data:
+  kafka-log:
+  kafka-secrets:
+  mysql-data:
+  postgres-data:
 
 networks:
   currency-network-api: null
