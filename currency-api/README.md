@@ -13,6 +13,8 @@ For further reference, please consider the following sections:
 
 http://localhost:8081/exchange-service/exchange-controller/exchangeinfo/welcome
 
+http://localhost:8081/exchange-service/exchange-controller/exchangeinfos
+
 http://localhost:8081/exchange-service/exchange-controller/exchangeinfo/from/INR/to/USD
 
 
@@ -33,6 +35,8 @@ http://localhost:8761/
 ### Currency Exchange Service
 
 http://localhost:8765/exchange-service/exchange-controller/exchangeinfo/welcome
+
+http://localhost:8765/exchange-service/exchange-controller/exchangeinfos
 
 http://localhost:8765/exchange-service/exchange-controller/exchangeinfo/from/INR/to/USD
 
